@@ -1,3 +1,3 @@
 install:
 	git pull
-	helm install appName=$(appName) .
+	helm install -f Chart.yaml appName=$(appName) .
