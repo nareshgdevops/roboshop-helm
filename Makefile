@@ -1,2 +1,2 @@
 install:
-	helm install -f appName=$(appName) .
+	helm install appName=$(appName) .
