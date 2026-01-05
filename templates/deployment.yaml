@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.14.2
+          image: public.ecr.aws/w8x4g9h7/roboshop-v3/{{ .Values.appName }}
           ports:
             - containerPort: {{ .Values.containerPort }}
