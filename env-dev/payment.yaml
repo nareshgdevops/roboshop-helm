@@ -1,2 +1,3 @@
 appName: payment
 containerPort: 80
+serviceType: ClusterIP

@@ -1,2 +1,3 @@
 appName: shipping
 containerPort: 80
+serviceType: ClusterIP
