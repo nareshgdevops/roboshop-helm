@@ -2,10 +2,6 @@ appName: user
 containerPort: 80
 serviceType: ClusterIP
 configMap_data:
-  CART_HOST: cart
-  CART_PORT: "8080"
-  USER_HOST: user
-  USER_PORT: "8080"
-  AMQP_HOST: rabbitmq-ip
-  AMQP_USER: roboshop
-  AMQP_PASS: roboshop123
+  MONGO: true
+  MONGO_URL: mongodb://mongo-ip:27017/users
+  REDIS_URL: redis://redis-ip:6379
