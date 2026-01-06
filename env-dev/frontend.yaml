@@ -1,5 +1,5 @@
 appName: frontend
 containerPort: 80
 configMap_data:
-  x: "100"
-  y: test
+  x1: "100"
+  y1: test
