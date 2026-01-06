@@ -1,4 +1,3 @@
 appName: frontend
 containerPort: 80
 serviceType: LoadBalancer
-configMap_data:
