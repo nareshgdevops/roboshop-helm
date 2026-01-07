@@ -15,5 +15,5 @@ spec:
             - configMapRef:
                 name: {{ .Values.appName }}
       restartPolicy: Never
-  backoffLimit: 4
+  backoffLimit: 0
 {{ end }}
