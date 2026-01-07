@@ -1,7 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pi
+  name: {{ .Values.appName }}-db-job
+  labels:
+    app: {{ .Values.appName }}
 spec:
   template:
     spec:
