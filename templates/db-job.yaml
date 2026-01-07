@@ -1,22 +1,20 @@
-{{ if .Values.db-job.enabled }}
-
+{{ if .Values.db_job.enabled }}
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ .Values.appName }}-db-job
   labels:
-    app: {{ .Values.appName }}db-job
+    app: {{ .Values.appName }}
 spec:
   template:
+    metadata:
     spec:
       containers:
-        - name: db
+        - name: db-job
           image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
           envFrom:
-            - configMapRef:
+            - secretRef:
                 name: {{ .Values.appName }}
-
       restartPolicy: Never
-  backoffLimit: 1
-
+  backoffLimit: 0
   {{ end }}
