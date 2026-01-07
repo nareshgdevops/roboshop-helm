@@ -1,6 +1,4 @@
 appName: cart
-containerPort: 80
-serviceType: ClusterIP
 configMap_data:
   CATALOGUE_HOST: catalogue
   CATALOGUE_PORT: "8080"

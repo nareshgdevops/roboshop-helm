@@ -1,6 +1,4 @@
 appName: user
-containerPort: 80
-serviceType: ClusterIP
 configMap_data:
   MONGO: true
   MONGO_URL: mongodb://mongo-ip:27017/users

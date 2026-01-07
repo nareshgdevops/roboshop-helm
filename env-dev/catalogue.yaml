@@ -1,6 +1,4 @@
 appName: catalogue
-containerPort: 80
-ServiceType: ClusterIP
 configMap_data:
   MONGO: true
   MONGO_URL: mongodb://mongo-ip:27017/catalogue

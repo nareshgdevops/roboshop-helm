@@ -1,5 +1,4 @@
 appName: frontend
-containerPort: 80
 ServiceType: LoadBalancer
 configMap_data:
   CATALOGUE_HOST: catalogue

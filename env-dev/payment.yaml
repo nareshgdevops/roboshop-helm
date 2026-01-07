@@ -1,6 +1,4 @@
 appName: payment
-containerPort: 80
-serviceType: ClusterIP
 configMap_data:
   CART_HOST: cart
   CART_PORT: "8080"
