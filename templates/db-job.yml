@@ -3,7 +3,7 @@ kind: Job
 metadata:
   name: {{ .Values.appName }}-db-job
   labels:
-    app: { { .Values.appName } }
+    app: {{ .Values.appName }}
 spec:
   template:
     spec:
