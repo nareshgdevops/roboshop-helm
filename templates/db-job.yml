@@ -1,17 +1,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ .Values.appName }}-db-job
-  labels:
-    app: {{ .Values.appName }}
+  name: pi
 spec:
   template:
     spec:
       containers:
-        - name: db-job
-          image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.appName }}
+        - name: pi
+          image: perl:5.34.0
+          command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
       restartPolicy: Never
-  backoffLimit: 0
+  backoffLimit: 4
