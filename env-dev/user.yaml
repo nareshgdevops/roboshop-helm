@@ -1,5 +1,5 @@
 appName: user
 configMap_data:
   MONGO: true
-  MONGO_URL: mongodb://mongo-ip:27017/users
-  REDIS_URL: redis://redis-ip:6379
+  MONGO_URL: mongodb://mongodb-dev.nareshdevops1218.online:27017/users
+  REDIS_URL: redis://redis-dev.nareshdevops1218.online:6379

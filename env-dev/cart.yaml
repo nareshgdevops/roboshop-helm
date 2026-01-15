@@ -2,4 +2,4 @@ appName: cart
 configMap_data:
   CATALOGUE_HOST: catalogue
   CATALOGUE_PORT: "8080"
-  REDIS_HOST: redis
+  REDIS_HOST: redis-dev.nareshdevops1218.online
