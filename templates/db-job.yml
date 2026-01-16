@@ -9,7 +9,7 @@ spec:
   template:
     spec:
       initContainers:
-      {{ - range .Values.db_job.initjobs }}
+      {{- range .Values.db_job.initjobs }}
       - name: {{ . }}
         image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
         env:
@@ -18,7 +18,7 @@ spec:
         envFrom:
           - configMapRef:
               name: {{ $.Values.appName }}
-      {{ - end }}
+      {{- end }}
       containers:
       {{- range .Values.db_job.jobs }}
       - name: {{ . }}
