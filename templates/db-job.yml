@@ -9,11 +9,16 @@ spec:
   template:
     spec:
       containers:
-        - name: db-job
+      {{ - range .Values.db_job.jobs }}
+        - name: {{ . }}
           image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
+          env:
+            - name: SCHEMA_FILE
+              value: db/.{{ . }}.{{ .Values.db_job.ext }}
           envFrom:
             - configMapRef:
-                name: {{ .Values.appName }}
+                name: {{ $.Values.appName }}
+      {{ - end }}
       restartPolicy: Never
   backoffLimit: 0
 {{ end }}
