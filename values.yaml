@@ -1,4 +1,4 @@
-containerPort: 80
+containerPort: 8080
 ServiceType: ClusterIP
 db_job:
   enabled: false
