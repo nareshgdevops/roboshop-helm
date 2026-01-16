@@ -8,6 +8,17 @@ metadata:
 spec:
   template:
     spec:
+      initContainers:
+      {{ - range .Values.db_job.initjobs }}
+      - name: {{ . }}
+        image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
+        env:
+          - name: SCHEMA_FILE
+            value: db/{{ . }}.{{ $.Values.db_job.ext }}
+        envFrom:
+          - configMapRef:
+              name: {{ $.Values.appName }}
+      {{ - end }}
       containers:
       {{- range .Values.db_job.jobs }}
       - name: {{ . }}
