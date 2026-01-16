@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       {{- range .Values.db_job.jobs }}
-      - name: { { . } }
+      - name: {{ . }}
         image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
         env:
           - name: SCHEMA_FILE
