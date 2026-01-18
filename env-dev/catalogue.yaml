@@ -1,3 +1,4 @@
+env: dev
 appName: catalogue
 configMap_data:
   MONGO: true
