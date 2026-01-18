@@ -20,5 +20,5 @@ spec:
           ports:
             - containerPort: {{ .Values.containerPort }}
           envFrom:
-            - configMapRef:
+            - SecretRef:
                 name: {{ .Values.appName }}
