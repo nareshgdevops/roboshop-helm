@@ -1,3 +1,4 @@
+env: dev
 appName: shipping
 configMap_data:
   CART_ENDPOINT: cart:8080

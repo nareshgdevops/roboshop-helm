@@ -1,3 +1,4 @@
+env: dev
 appName: payment
 configMap_data:
   CART_HOST: cart

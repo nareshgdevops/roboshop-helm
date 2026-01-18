@@ -1,3 +1,4 @@
+env: dev
 appName: cart
 configMap_data:
   CATALOGUE_HOST: catalogue

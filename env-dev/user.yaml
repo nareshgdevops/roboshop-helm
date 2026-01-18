@@ -1,3 +1,4 @@
+env: dev
 appName: user
 configMap_data:
   MONGO: true
