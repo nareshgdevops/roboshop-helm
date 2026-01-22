@@ -4,4 +4,4 @@ install:
 
 uninstall:
 	git pull
-	helm uninstall $(appName) -n app
+	helm uninstall $(appName) -n apps
