@@ -13,3 +13,10 @@ configMap_data:
   SHIPPING_PORT: "8080"
   PAYMENT_HOST: payment
   PAYMENT_PORT: "8080"
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "30m"
+  limits:
+    memory: "128Mi"
+    cpu: "50m"
