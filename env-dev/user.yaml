@@ -1,9 +1,9 @@
 env: dev
 appName: user
-configMap_data:
-  MONGO: true
-  MONGO_URL: mongodb://mongodb-dev.nareshdevops1218.online:27017/users
-  REDIS_URL: redis://redis-dev.nareshdevops1218.online:6379
+#configMap_data:
+#  MONGO: true
+#  MONGO_URL: mongodb://mongodb-dev.nareshdevops1218.online:27017/users
+#  REDIS_URL: redis://redis-dev.nareshdevops1218.online:6379
 resources:
   requests:
     memory: "64Mi"

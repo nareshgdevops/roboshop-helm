@@ -1,12 +1,12 @@
 env: dev
 appName: catalogue
-configMap_data:
-  MONGO: true
-  MONGO_URL: mongodb://mongodb-dev.nareshdevops1218.online:27017/catalogue
-  DB_TYPE: mongo
-  APP_GIT_URL: https://github.com/roboshop-devops-project-v3/catalogue
-  DB_HOST: mongodb-dev.nareshdevops1218.online
-  SCHEMA_FILE: db/master-data.js
+#configMap_data:
+#  MONGO: true
+#  MONGO_URL: mongodb://mongodb-dev.nareshdevops1218.online:27017/catalogue
+#  DB_TYPE: mongo
+#  APP_GIT_URL: https://github.com/roboshop-devops-project-v3/catalogue
+#  DB_HOST: mongodb-dev.nareshdevops1218.online
+#  SCHEMA_FILE: db/master-data.js
 db_job:
   enabled: true
   ext: js

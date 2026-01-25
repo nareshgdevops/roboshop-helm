@@ -16,8 +16,8 @@ spec:
           - name: SCHEMA_FILE
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
         envFrom:
-          - configMapRef:
-              name: {{ $.Values.appName }}
+          - secretRef:
+              name: {{ .Values.appName }}
       {{- end }}
       containers:
       {{- range .Values.db_job.jobs }}
@@ -27,8 +27,8 @@ spec:
           - name: SCHEMA_FILE
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
         envFrom:
-          - configMapRef:
-              name: {{ $.Values.appName }}
+          - secretRef:
+              name: {{ .Values.appName }}
       {{- end }}
       restartPolicy: Never
   backoffLimit: 0
