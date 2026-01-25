@@ -17,7 +17,7 @@ spec:
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
         envFrom:
           - secretRef:
-              name: {{ .Values.appName }}
+              name: {{ $.Values.appName }}
       {{- end }}
       containers:
       {{- range .Values.db_job.jobs }}
@@ -28,7 +28,7 @@ spec:
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
         envFrom:
           - secretRef:
-              name: {{ .Values.appName }}
+              name: {{ $.Values.appName }}
       {{- end }}
       restartPolicy: Never
   backoffLimit: 0
