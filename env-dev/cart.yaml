@@ -11,6 +11,4 @@ resources:
   limits:
     memory: "128Mi"
     cpu: "50m"
-minReplicas: 1
-maxReplicas: 10
 
