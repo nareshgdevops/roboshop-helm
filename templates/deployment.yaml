@@ -14,6 +14,13 @@ spec:
       labels:
         app: {{ .Values.appName }}
     spec:
+      topologySpreadConstraints:
+        - topologyKey: kubernetes.io/hostname
+          maxSkew: 1
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: {{ .Values.appName }}
       containers:
         - name: {{ .Values.appName }}
           image: public.ecr.aws/w8x4g9h7/roboshop-v3/{{ .Values.appName }}
