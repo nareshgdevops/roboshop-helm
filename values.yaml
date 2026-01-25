@@ -3,5 +3,5 @@ ServiceType: ClusterIP
 db_job:
   enabled: false
 
-minReplicas: 1
+minReplicas: 2
 maxReplicas: 10
