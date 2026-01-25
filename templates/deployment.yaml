@@ -24,7 +24,7 @@ spec:
                     values:
                       - roboshop
       topologySpreadConstraints:
-        - topologyKey: kubernetes.io/hostname
+        - topologyKey: project/name
           maxSkew: 1
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
