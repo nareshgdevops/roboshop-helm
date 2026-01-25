@@ -5,8 +5,8 @@ metadata:
   name: {{ .Values.appName }}-db-job
   labels:
     app: {{ .Values.appName }}
-#  annotations:
-#    "helm.sh/hook": pre-install
+  annotations:
+    "helm.sh/hook": pre-install
 #    "helm.sh/hook-delete-policy": hook-failed
 spec:
   template:
