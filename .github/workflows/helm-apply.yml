@@ -26,4 +26,4 @@ jobs:
           export AZURE_SECRET="${{ env.AZURE_SECRET }}"
           export AZURE_TENANT="${{ env.AZURE_TENANT }}"
           az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_SECRET --tenant $AZURE_TENANT
-          make dev-apply token=${vault_token}
+          make helm-dev-apply token=${vault_token}
