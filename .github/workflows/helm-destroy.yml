@@ -1,4 +1,4 @@
-name: Dev - Destroy
+name: Helm Dev - Destroy
 on: [workflow_dispatch]
 jobs:
   TerraformDestroy:
