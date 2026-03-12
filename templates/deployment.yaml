@@ -32,7 +32,7 @@ spec:
               app: {{ .Values.appName }}
       containers:
         - name: {{ .Values.appName }}
-          image: nareshgdevops.azurecr.io/roboshop-/{{ .Values.appName }}
+          image: nareshgdevops.azurecr.io/roboshop-{{ .Values.appName }}
           ports:
             - containerPort: {{ .Values.containerPort }}
           envFrom:
