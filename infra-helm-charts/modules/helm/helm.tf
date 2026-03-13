@@ -28,6 +28,23 @@ resource "helm_release" "external-secrets" {
   ]
 }
 
+resource "helm_release" "argo-cd" {
+  depends_on = [
+    null_resource.kubeconfig
+  ]
+  name              = "argo-cd"
+  repository        = "https://argoproj.github.io/argo-helm"
+  chart             = "argo-cd"
+  namespace         = "argocd"
+  create_namespace  = true
+  set = [
+    {
+      name  = "server.service.type"
+      value = "LoadBalancer"
+    }
+  ]
+}
+
 resource "null_resource" "secret_store" {
   depends_on = [
     helm_release.external-secrets
