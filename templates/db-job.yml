@@ -14,7 +14,7 @@ spec:
       initContainers:
       {{- range .Values.db_job.initjobs }}
       - name: {{ . }}
-        image: nareshgdevops.azurecr.io/roboshop-{{ .Values.appName }}-db-job:latest
+        image: nareshgdevops.azurecr.io/roboshop-{{ $.Values.appName }}-db-job:latest
         env:
           - name: SCHEMA_FILE
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
@@ -25,7 +25,7 @@ spec:
       containers:
       {{- range .Values.db_job.jobs }}
       - name: {{ . }}
-        image: nareshgdevops.azurecr.io/roboshop-{{ .Values.appName }}-db-job:latest
+        image: nareshgdevops.azurecr.io/roboshop-{{ $.Values.appName }}-db-job:latest
         env:
           - name: SCHEMA_FILE
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
