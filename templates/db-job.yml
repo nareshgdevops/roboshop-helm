@@ -25,7 +25,7 @@ spec:
       containers:
       {{- range .Values.db_job.jobs }}
       - name: {{ . }}
-        image: public.ecr.aws/w8x4g9h7/roboshop-v3/schema-load
+        image: nareshgdevops.azurecr.io/roboshop-{{ .Values.appName }}-db-job:latest
         env:
           - name: SCHEMA_FILE
             value: db/{{ . }}.{{ $.Values.db_job.ext }}
