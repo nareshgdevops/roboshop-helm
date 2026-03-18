@@ -94,6 +94,6 @@ resource "helm_release" "filebeat" {
   create_namespace = true
 
   values = [
-    file("${path.module}/helm-values/filebeat.yml")
+    file("${path.module}/../helm-values/filebeat.yml")
   ]
 }
