@@ -156,7 +156,7 @@ EOF
   }
 
 }
-/*
+
 resource "helm_release" "external-dns" {
 
   depends_on = [
@@ -173,5 +173,5 @@ resource "helm_release" "external-dns" {
   values = [
     file("${path.module}/helm-values/external-dns.yml")
   ]
-}*/
+}
 
