@@ -171,7 +171,7 @@ resource "helm_release" "external-dns" {
   wait       = "false"
   create_namespace = true
   values = [
-    file("${path.module}/helm-values/external-dns.yml")
+    file("${path.module}/../../helm-values/external-dns.yml")
   ]
 }
 
