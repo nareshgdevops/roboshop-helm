@@ -145,11 +145,11 @@ resource "null_resource" "external-dns-secret" {
   provisioner "local-exec" {
     command = <<EOF
 echo '{
-  "tenantId": "'"${data.vault_generic_secret.azure-sp.data["ARM_TENANT_ID"]}"'",
-  "subscriptionId": "'"${data.vault_generic_secret.azure-sp.data["ARM_SUBSCRIPTION_ID"]}"'",
+  "tenantId": "'"${data.vault_generic_secret.azure-sp.data["AZURE_TENANT"]}"'",
+  "subscriptionId": "'"${data.vault_generic_secret.azure-sp.data["AZURE_SUBSCRIPTION_ID"]}"'",
   "resourceGroup": "ngresources",
-  "aadClientId": "'"${data.vault_generic_secret.azure-sp.data["ARM_CLIENT_ID"]}"'",
-  "aadClientSecret": "'"${data.vault_generic_secret.azure-sp.data["ARM_CLIENT_SECRET"]}"'"
+  "aadClientId": "'"${data.vault_generic_secret.azure-sp.data["AZURE_CLIENT_ID"]}"'",
+  "aadClientSecret": "'"${data.vault_generic_secret.azure-sp.data["AZURE_SECRET"]}"'"
 }' >/tmp/azure.json
 kubectl create secret generic azure-config-file --namespace devops --from-file /tmp/azure.json
 EOF
