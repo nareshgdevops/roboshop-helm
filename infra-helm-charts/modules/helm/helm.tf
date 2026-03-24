@@ -131,33 +131,33 @@ EOF
   }
 }
 
-## External DNS external secret
+## External DNS Helm chart
 resource "null_resource" "external-dns-secret" {
-
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
   ]
+
   provisioner "local-exec" {
     command = <<EOF
-cat <<EOT > azure.json
-{
-  "tenantId": "${data.vault_generic_secret.roboshop-infra.data["AZURE_TENANT"]}",
-  "subscriptionId": "${data.vault_generic_secret.roboshop-infra.data["AZURE_SUBSCRIPTION_ID"]}",
-  "resourceGroup": "${var.rg_name}",
-  "aadClientId": "${data.vault_generic_secret.roboshop-infra.data["AZURE_CLIENT_ID"]}",
-  "aadClientSecret": "${data.vault_generic_secret.roboshop-infra.data["AZURE_SECRET"]}"
-}
-EOT
-kubectl create secret generic azure-config-file --namespace "devops" --from-file azure.json
+echo '{
+  "tenantId": "'"${data.vault_generic_secret.azure-sp.data["ARM_TENANT_ID"]}"'",
+  "subscriptionId": "'"${data.vault_generic_secret.azure-sp.data["ARM_SUBSCRIPTION_ID"]}"'",
+  "resourceGroup": "ngresources",
+  "aadClientId": "'"${data.vault_generic_secret.azure-sp.data["ARM_CLIENT_ID"]}"'",
+  "aadClientSecret": "'"${data.vault_generic_secret.azure-sp.data["ARM_CLIENT_SECRET"]}"'"
+}' >/tmp/azure.json
+kubectl create secret generic azure-config-file --namespace devops --from-file /tmp/azure.json
 EOF
   }
-}
 
-## External DNS Helm Chart
+}
+/*
 resource "helm_release" "external-dns" {
 
   depends_on = [
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress,
     null_resource.external-dns-secret
   ]
   name       = "external-dns"
@@ -166,5 +166,8 @@ resource "helm_release" "external-dns" {
   namespace  = "devops"
   wait       = "false"
   create_namespace = true
-}
+  values = [
+    file("${path.module}/helm-values/external-dns.yml")
+  ]
+}*/
 
