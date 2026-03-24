@@ -169,7 +169,7 @@ resource "helm_release" "external-dns" {
   ]
 }
 
-resource "helm_release" "cert-managers" {
+resource "helm_release" "cert-manager" {
 
   depends_on = [
     null_resource.kubeconfig
@@ -187,5 +187,30 @@ resource "helm_release" "cert-managers" {
       value = "true"
     }
   ]
+}
+
+resource "null_resource" "cert-manager" {
+  depends_on = [null_resource.kubeconfig, helm_release.cert-manager]
+  provisioner "local-exec" {
+    command = <<EOT
+cat <<-EOF > ${path.module}/../../issuer.yml
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt
+spec:
+  acme:
+    email: ngworks1218@outlook.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+EOF
+kubectl apply -f ${path.module}/../../issuer.yml
+EOT
+  }
 }
 
