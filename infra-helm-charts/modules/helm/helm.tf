@@ -38,6 +38,13 @@ resource "helm_release" "argo-cd" {
   namespace         = "argocd"
   create_namespace  = true
 
+  set = [
+    {
+      name  = "server.ingress.hostname"
+      value = "argocd-${var.env}-nareshdevops1218.online"
+    }
+  ]
+
   values = [
     file("${path.module}/../../helm-values/argocd.yml")
   ]

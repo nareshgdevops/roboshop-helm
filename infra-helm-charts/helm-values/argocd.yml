@@ -1,4 +1,9 @@
 server:
   ingress:
     enabled: false
-    hostname: argocd-dev.nareshdevops1218.online
+    ingressClassName: "nginx"
+    hostname: "argocd-dev.nareshdevops1218.online"
+
+configs:
+  params:
+    server.insecure: false
