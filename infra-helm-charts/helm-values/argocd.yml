@@ -3,6 +3,8 @@ server:
     enabled: true
     ingressClassName: "nginx"
     hostname: "argocd-dev.nareshdevops1218.online"
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: "argocd-dev.nareshdevops1218.online"
 
 configs:
   params:
