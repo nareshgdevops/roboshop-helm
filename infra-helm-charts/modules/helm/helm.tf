@@ -119,3 +119,32 @@ EOF
   }
 }
 
+## External DNS Helm Chart
+resource "helm_release" "external-dns" {
+
+  depends_on = [
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress
+  ]
+  name       = "external-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns/"
+  chart      = "external-dns"
+  namespace  = "devops"
+  wait       = "false"
+  create_namespace = true
+
+  provisioner "local-exec" {
+    command = <<EOF
+cat <<EOT > azure.json
+{
+  "tenantId": "${data.vault_generic_secret.roboshop-infra.data["AZURE_TENANT"]}",
+  "subscriptionId": "${data.vault_generic_secret.roboshop-infra.data["AZURE_SUBSCRIPTION_ID"]}",
+  "resourceGroup": "${var.rg_name}",
+  "aadClientId": "${data.vault_generic_secret.roboshop-infra.data["AZURE_CLIENT_ID"]}",
+  "aadClientSecret": "${data.vault_generic_secret.roboshop-infra.data["AZURE_SECRET"]}"
+}
+EOT
+EOF
+  }
+}
+
