@@ -5,3 +5,5 @@ db_job:
 
 minReplicas: 1
 maxReplicas: 1
+ingress:
+  enabled: false

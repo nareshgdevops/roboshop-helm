@@ -1,6 +1,5 @@
 env: dev
 appName: frontend
-ServiceType: LoadBalancer
 containerPort: 80
 #configMap_data:
 #  CATALOGUE_HOST: catalogue
@@ -20,3 +19,6 @@ resources:
   limits:
     memory: "128Mi"
     cpu: "50m"
+ingress:
+  enabled: true
+  host: frontend-dev.nareshdevops1218.online
