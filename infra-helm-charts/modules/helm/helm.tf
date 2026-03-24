@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    null = {
+      source  = "hashicorp/null"
+      version = "3.2.4"
+    }
+  }
+}
 resource null_resource "kubeconfig" {
   triggers = {
     time = timestamp()
@@ -119,20 +127,13 @@ EOF
   }
 }
 
-## External DNS Helm Chart
-resource "helm_release" "external-dns" {
+## External DNS external secret
+resource "null_resource" "external-dns-secret" {
 
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
   ]
-  name       = "external-dns"
-  repository = "https://kubernetes-sigs.github.io/external-dns/"
-  chart      = "external-dns"
-  namespace  = "devops"
-  wait       = "false"
-  create_namespace = true
-
   provisioner "local-exec" {
     command = <<EOF
 cat <<EOT > azure.json
@@ -144,7 +145,22 @@ cat <<EOT > azure.json
   "aadClientSecret": "${data.vault_generic_secret.roboshop-infra.data["AZURE_SECRET"]}"
 }
 EOT
+kubectl create secret generic azure-config-file --namespace "devops" --from-file azure.json
 EOF
   }
+}
+
+## External DNS Helm Chart
+resource "helm_release" "external-dns" {
+
+  depends_on = [
+    null_resource.external-dns-secret
+  ]
+  name       = "external-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns/"
+  chart      = "external-dns"
+  namespace  = "devops"
+  wait       = "false"
+  create_namespace = true
 }
 
