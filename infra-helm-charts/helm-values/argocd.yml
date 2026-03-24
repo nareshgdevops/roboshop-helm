@@ -1,0 +1,4 @@
+server:
+  ingress:
+    enabled: false
+    hostname: argocd-dev.nareshdevops1218.online

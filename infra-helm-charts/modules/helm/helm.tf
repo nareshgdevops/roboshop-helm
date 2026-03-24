@@ -37,11 +37,9 @@ resource "helm_release" "argo-cd" {
   chart             = "argo-cd"
   namespace         = "argocd"
   create_namespace  = true
-  set = [
-    {
-      name  = "server.service.type"
-      value = "LoadBalancer"
-    }
+
+  values = [
+    file("${path.module}/../../helm-values/argocd.yml")
   ]
 }
 
