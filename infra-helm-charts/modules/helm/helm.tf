@@ -30,7 +30,8 @@ resource "helm_release" "external-secrets" {
 
 resource "helm_release" "argo-cd" {
   depends_on = [
-    null_resource.kubeconfig
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress
   ]
   name              = "argo-cd"
   repository        = "https://argoproj.github.io/argo-helm"
@@ -89,7 +90,8 @@ TF
 resource "helm_release" "filebeat" {
 
   depends_on = [
-    null_resource.kubeconfig
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress
   ]
   name       = "filebeat"
   repository = "https://helm.elastic.co"
@@ -106,7 +108,10 @@ resource "helm_release" "filebeat" {
 # Direct Helm Chart is a Problem - https://github.com/kubernetes/ingress-nginx/issues/10863
 
 resource "null_resource" "nginx-ingress" {
-  depends_on = [null_resource.kubeconfig]
+  depends_on = [
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress
+  ]
   provisioner "local-exec" {
     command = <<EOF
  kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
