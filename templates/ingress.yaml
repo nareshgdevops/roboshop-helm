@@ -4,7 +4,10 @@ kind: Ingress
 metadata:
   name: {{ .Values.appName }}
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: { { .Values.ingress.host } }
+    # Use Let's Encrypt production issuer
+    cert-manager.io/cluster-issuer: letsencrypt
+    # Force HTTPS redirect
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   ingressClassName: nginx
   rules:
