@@ -133,6 +133,10 @@ EOF
 
 ## External DNS Helm chart
 resource "null_resource" "external-dns-secret" {
+  triggers = {
+    time = timestamp()
+  }
+
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
