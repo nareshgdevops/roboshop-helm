@@ -1,13 +1,26 @@
+#server:
+#  ingress:
+#    enabled: true
+#    ingressClassName: "nginx"
+#    hostname: "argocd-dev.nareshdevops1218.online"
+##    tls: true
+#configs:
+##  certificate:
+##    enabled: true
+##    issuer:
+##      group: "cert-manager.io"
+##      kind: "ClusterIssuer"
+##      name: "letsencrypt"
+
 server:
   ingress:
     enabled: true
-    ingressClassName: "nginx"
-    hostname: "argocd-dev.nareshdevops1218.online"
-    tls: true
-#configs:
-#  certificate:
-#    enabled: true
-#    issuer:
-#      group: "cert-manager.io"
-#      kind: "ClusterIssuer"
-#      name: "letsencrypt"
+    ingressClassName: nginx
+    hosts:
+      - argocd-dev.nareshdevops1218.online  # replace with your env if templating outside
+    tls:
+      - hosts:
+          - argocd-dev.nareshdevops1218.online
+        secretName: argocd-server-tls
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt

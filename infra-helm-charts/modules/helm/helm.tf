@@ -49,7 +49,11 @@ resource "helm_release" "argo-cd" {
 
   set = [
     {
-      name  = "server.ingress.hostname"
+      name  = "server.ingress.hosts[0]"
+      value = "argocd-${var.env}.nareshdevops1218.online"
+    },
+    {
+      name  = "server.ingress.tls[0].hosts[0]"
       value = "argocd-${var.env}.nareshdevops1218.online"
     }
   ]
