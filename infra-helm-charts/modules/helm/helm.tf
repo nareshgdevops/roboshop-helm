@@ -116,6 +116,7 @@ resource "helm_release" "filebeat" {
 # Direct Helm Chart is a Problem - https://github.com/kubernetes/ingress-nginx/issues/10863
 
 resource "null_resource" "nginx-ingress" {
+
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress

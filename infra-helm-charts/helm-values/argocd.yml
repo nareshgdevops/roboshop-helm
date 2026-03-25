@@ -4,10 +4,10 @@ server:
     ingressClassName: "nginx"
     hostname: "argocd-dev.nareshdevops1218.online"
     tls: true
-configs:
-  certificate:
-    enabled: true
-    issuer:
-      group: "cert-manager.io"
-      kind: "ClusterIssuer"
-      name: "letsencrypt"
+#configs:
+#  certificate:
+#    enabled: true
+#    issuer:
+#      group: "cert-manager.io"
+#      kind: "ClusterIssuer"
+#      name: "letsencrypt"
