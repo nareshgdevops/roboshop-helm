@@ -3,9 +3,11 @@ server:
     enabled: true
     ingressClassName: "nginx"
     hostname: "argocd-dev.nareshdevops1218.online"
-    annotations:
-      external-dns.alpha.kubernetes.io/hostname: "argocd-dev.nareshdevops1218.online"
-
+    tls: true
 configs:
-  params:
-    server.insecure: true
+  certificate:
+    enabled: true
+    issuer:
+      group: "cert-manager.io"
+      kind: "ClusterIssuer"
+      name: "letsencrypt"

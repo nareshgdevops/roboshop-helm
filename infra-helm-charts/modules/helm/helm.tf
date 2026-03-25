@@ -51,10 +51,6 @@ resource "helm_release" "argo-cd" {
     {
       name  = "server.ingress.hostname"
       value = "argocd-${var.env}.nareshdevops1218.online"
-    },
-    {
-      name  = "server.ingress.annotations.external-dns.alpha.kubernetes.io/hostname"
-      value = "argocd-${var.env}.nareshdevops1218.online"
     }
   ]
 
