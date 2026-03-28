@@ -122,8 +122,7 @@ resource "helm_release" "filebeat" {
 resource "null_resource" "nginx-ingress" {
 
   depends_on = [
-    null_resource.kubeconfig,
-    null_resource.nginx-ingress
+    null_resource.kubeconfig
   ]
   provisioner "local-exec" {
     command = <<EOF
@@ -173,7 +172,8 @@ resource "helm_release" "external-dns" {
 resource "helm_release" "cert-manager" {
 
   depends_on = [
-    null_resource.kubeconfig
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress
   ]
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
