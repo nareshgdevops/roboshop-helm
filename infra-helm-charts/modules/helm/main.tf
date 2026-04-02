@@ -85,7 +85,7 @@ EOF
   }
 }
 
-/*resource "helm_release" "argo-cd" {
+resource "helm_release" "argo-cd" {
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
@@ -128,7 +128,7 @@ resource "helm_release" "filebeat" {
 }
 
 ## External DNS Helm chart
-resource "null_resource" "external-dns-secret" {
+/*resource "null_resource" "external-dns-secret" {
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
