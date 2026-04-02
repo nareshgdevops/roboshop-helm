@@ -26,6 +26,9 @@ spec:
         envFrom:
           - secretRef:
               name: {{ $.Values.appName }}
+        securityContext:
+          allowPrivilegeEscalation: true
+          readOnlyRootFilesystem: true
       {{- end }}
       containers:
       {{- range .Values.db_job.jobs }}
