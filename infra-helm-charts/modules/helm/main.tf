@@ -128,7 +128,7 @@ resource "helm_release" "filebeat" {
 }
 
 ## External DNS Helm chart
-/*resource "null_resource" "external-dns-secret" {
+resource "null_resource" "external-dns-secret" {
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
@@ -167,7 +167,7 @@ resource "helm_release" "external-dns" {
   ]
 }
 
-resource "helm_release" "cert-manager" {
+/*resource "helm_release" "cert-manager" {
 
   depends_on = [
     null_resource.kubeconfig,
