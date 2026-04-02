@@ -50,6 +50,6 @@ spec:
             limits:
               memory: {{ .Values.resources.limits.memory | quote }}
               cpu: {{ .Values.resources.limits.cpu | quote }}
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
