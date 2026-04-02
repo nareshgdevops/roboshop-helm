@@ -127,7 +127,7 @@ resource "helm_release" "filebeat" {
   ]
 }
 
-/*## External DNS Helm chart
+## External DNS Helm chart
 resource "null_resource" "external-dns-secret" {
   depends_on = [
     null_resource.kubeconfig,
@@ -211,5 +211,5 @@ EOF
 kubectl apply -f ${path.module}/../../issuer.yml
 EOT
   }
-}*/
+}
 
