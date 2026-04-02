@@ -9,13 +9,13 @@ metadata:
     "helm.sh/hook": pre-install
     helm.sh/hook-delete-policy: before-hook-creation,hook-failed
 spec:
-  securityContext:
-    runAsUser: 1000
-    runAsGroup: 3000
-    fsGroup: 2000
-    supplementalGroups: [ 4000 ]
   template:
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        supplementalGroups: [ 4000 ]
       initContainers:
       {{- range .Values.db_job.initjobs }}
       - name: {{ . }}
@@ -27,7 +27,7 @@ spec:
           - secretRef:
               name: {{ $.Values.appName }}
         securityContext:
-          allowPrivilegeEscalation: true
+          allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
       {{- end }}
       containers:
@@ -41,7 +41,7 @@ spec:
           - secretRef:
               name: {{ $.Values.appName }}
         securityContext:
-          allowPrivilegeEscalation: true
+          allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
       {{- end }}
       restartPolicy: Never
