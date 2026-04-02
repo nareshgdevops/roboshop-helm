@@ -36,33 +36,6 @@ resource "helm_release" "external-secrets" {
   ]
 }
 
-resource "helm_release" "argo-cd" {
-  depends_on = [
-    null_resource.kubeconfig,
-    null_resource.nginx-ingress
-  ]
-  name              = "argo-cd"
-  repository        = "https://argoproj.github.io/argo-helm"
-  chart             = "argo-cd"
-  namespace         = "argocd"
-  create_namespace  = true
-
-  set = [
-    {
-      name  = "server.ingress.hosts[0]"
-      value = "argocd-${var.env}.nareshdevops1218.online"
-    },
-    {
-      name  = "server.ingress.tls[0].hosts[0]"
-      value = "argocd-${var.env}.nareshdevops1218.online"
-    }
-  ]
-
-  values = [
-    file("${path.module}/../../helm-values/argocd.yml")
-  ]
-}
-
 resource "null_resource" "secret_store" {
   depends_on = [
     helm_release.external-secrets
@@ -98,6 +71,43 @@ TF
   }
 }
 
+# Direct Helm Chart is a Problem - https://github.com/kubernetes/ingress-nginx/issues/10863
+
+resource "null_resource" "nginx-ingress" {
+
+  depends_on = [
+    null_resource.kubeconfig
+  ]
+  provisioner "local-exec" {
+    command = <<EOF
+ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+EOF
+  }
+}
+
+resource "helm_release" "argo-cd" {
+  depends_on = [
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress
+  ]
+  name              = "argo-cd"
+  repository        = "https://argoproj.github.io/argo-helm"
+  chart             = "argo-cd"
+  namespace         = "argocd"
+  create_namespace  = true
+
+  set = [
+    {
+      name  = "server.ingress.hostname"
+      value = "argocd-${var.env}.nareshdevops1218.online"
+    }
+  ]
+
+  values = [
+    file("${path.module}/../../helm-values/argocd.yml")
+  ]
+}
+
 ## Filebeat Helm Chart
 resource "helm_release" "filebeat" {
 
@@ -117,21 +127,7 @@ resource "helm_release" "filebeat" {
   ]
 }
 
-# Direct Helm Chart is a Problem - https://github.com/kubernetes/ingress-nginx/issues/10863
-
-resource "null_resource" "nginx-ingress" {
-
-  depends_on = [
-    null_resource.kubeconfig
-  ]
-  provisioner "local-exec" {
-    command = <<EOF
- kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
-EOF
-  }
-}
-
-## External DNS Helm chart
+/*## External DNS Helm chart
 resource "null_resource" "external-dns-secret" {
   depends_on = [
     null_resource.kubeconfig,
@@ -156,6 +152,8 @@ EOF
 resource "helm_release" "external-dns" {
 
   depends_on = [
+    null_resource.kubeconfig,
+    null_resource.nginx-ingress,
     null_resource.external-dns-secret
   ]
   name       = "external-dns"
@@ -213,5 +211,5 @@ EOF
 kubectl apply -f ${path.module}/../../issuer.yml
 EOT
   }
-}
+}*/
 
