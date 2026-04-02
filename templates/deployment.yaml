@@ -52,4 +52,4 @@ spec:
               cpu: {{ .Values.resources.limits.cpu | quote }}
             securityContext:
               allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: false
+              readOnlyRootFilesystem: true
