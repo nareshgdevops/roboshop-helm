@@ -73,7 +73,7 @@ TF
 
 # Direct Helm Chart is a Problem - https://github.com/kubernetes/ingress-nginx/issues/10863
 
-/*resource "null_resource" "nginx-ingress" {
+resource "null_resource" "nginx-ingress" {
 
   depends_on = [
     null_resource.kubeconfig
@@ -85,7 +85,7 @@ EOF
   }
 }
 
-resource "helm_release" "argo-cd" {
+/*resource "helm_release" "argo-cd" {
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress
