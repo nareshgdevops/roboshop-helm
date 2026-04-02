@@ -33,7 +33,7 @@ spec:
           - secretRef:
               name: {{ $.Values.appName }}
         securityContext:
-          allowPrivilegeEscalation: false
+          allowPrivilegeEscalation: true
           readOnlyRootFilesystem: true
       {{- end }}
       restartPolicy: Never
