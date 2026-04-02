@@ -73,7 +73,7 @@ TF
 
 # Direct Helm Chart is a Problem - https://github.com/kubernetes/ingress-nginx/issues/10863
 
-resource "null_resource" "nginx-ingress" {
+/*resource "null_resource" "nginx-ingress" {
 
   depends_on = [
     null_resource.kubeconfig
@@ -211,5 +211,5 @@ EOF
 kubectl apply -f ${path.module}/../../issuer.yml
 EOT
   }
-}
+}*/
 
