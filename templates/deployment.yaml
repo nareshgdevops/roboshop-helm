@@ -37,6 +37,9 @@ spec:
               app: {{ .Values.appName }}
       containers:
         - name: {{ .Values.appName }}
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
           image: nareshgdevops.azurecr.io/roboshop-{{ .Values.appName }}:{{ .Values.appTag }}
           ports:
             - containerPort: {{ .Values.containerPort }}
@@ -53,3 +56,7 @@ spec:
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
+
+      volumes:
+        - name: tmp
+          emptyDir: { }
