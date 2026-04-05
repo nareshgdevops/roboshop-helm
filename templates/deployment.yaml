@@ -35,6 +35,7 @@ spec:
           labelSelector:
             matchLabels:
               app: {{ .Values.appName }}
+      serviceAccountName: {{ .Values.appName }}
       containers:
         - name: {{ .Values.appName }}
           volumeMounts:

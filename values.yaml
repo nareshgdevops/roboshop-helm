@@ -8,4 +8,5 @@ maxReplicas: 1
 ingress:
   enabled: false
 istio:
-  enabled: false
+  auth_policy:
+    enabled: true

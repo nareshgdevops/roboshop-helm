@@ -22,3 +22,6 @@ resources:
 ingress:
   enabled: true
   host: frontend-dev.nareshdevops1218.online
+istio:
+  auth_policy:
+    enabled: false
