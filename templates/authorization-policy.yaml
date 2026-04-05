@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: { { .Values.appName } }
+      app: {{ .Values.appName }}
   action: ALLOW
   rules:
     - from:
