@@ -223,7 +223,7 @@ resource "helm_release" "istio-base" {
   name       = "istio-base"
   repository = "https://istio-release.storage.googleapis.com/charts"
   chart      = "base"
-  namespace  = "istio-system "
+  namespace  = "istio-system"
   create_namespace = true
 }
 
@@ -236,7 +236,7 @@ resource "helm_release" "istiod" {
   name             = "istiod"
   repository       = "https://istio-release.storage.googleapis.com/charts"
   chart            = "istiod"
-  namespace        = "istio-system "
+  namespace        = "istio-system"
   create_namespace = true
   version          = "1.27.0"
 }
