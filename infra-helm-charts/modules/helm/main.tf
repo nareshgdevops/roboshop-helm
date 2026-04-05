@@ -240,3 +240,41 @@ resource "helm_release" "istiod" {
   create_namespace = true
   version          = "1.27.0"
 }
+
+resource "null_resource" "kiali" {
+  depends_on = [
+    null_resource.kubeconfig,
+    helm_release.istiod,
+    null_resource.nginx-ingress
+  ]
+  provisioner "local-exec" {
+    command = <<EOF
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.27/samples/addons/kiali.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.27/samples/addons/prometheus.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.27/samples/addons/grafana.yaml
+kubectl apply -f - <<EOK
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/secure-backends: "false"
+  name: kiali
+  namespace: istio-system
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: kiali-dev.nareshdevops1218.online
+    http:
+      paths:
+      - backend:
+          service:
+            name: kiali
+            port:
+              number: 20001
+        path: /kiali
+        pathType: Prefix
+EOK
+EOF
+  }
+}
