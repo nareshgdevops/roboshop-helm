@@ -213,3 +213,30 @@ EOT
   }
 }*/
 
+#######
+#Install istio-base, istio-d
+resource "helm_release" "istio-base" {
+
+  depends_on = [
+    null_resource.kubeconfig
+  ]
+  name       = "istio-base"
+  repository = "https://istio-release.storage.googleapis.com/charts"
+  chart      = "istio"
+  namespace  = "istio-system "
+  wait       = "false"
+  create_namespace = true
+}
+
+resource "helm_release" "istiod" {
+
+  depends_on = [
+    null_resource.kubeconfig
+  ]
+  name       = "istiod"
+  repository = "https://istio-release.storage.googleapis.com/charts"
+  chart      = "istio"
+  namespace  = "istio-system "
+  wait       = "false"
+  create_namespace = true
+}
