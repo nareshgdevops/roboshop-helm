@@ -22,3 +22,6 @@ resources:
   limits:
     memory: "248Mi"
     cpu: "200m"
+istio:
+  enabled: true
+  principals: ["cluster.local/ns/app/sa/frontend"]

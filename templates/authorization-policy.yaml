@@ -1,3 +1,4 @@
+{{ if .Values.istio.enabled }}
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
@@ -8,3 +9,4 @@ spec:
     - from:
         - source:
             principals: {{ .Values.istio.principals }}
+  {{ end }}

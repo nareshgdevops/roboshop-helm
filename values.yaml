@@ -7,3 +7,5 @@ minReplicas: 1
 maxReplicas: 1
 ingress:
   enabled: false
+istio:
+  enabled: false
