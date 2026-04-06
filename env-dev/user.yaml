@@ -12,4 +12,4 @@ resources:
     memory: "128Mi"
     cpu: "50m"
 istio:
-  principals: ["cluster.local/ns/app/sa/frontend", "cluster.local/ns/app/sa/payment"]
+  principals: ["cluster.local/ns/apps/sa/frontend", "cluster.local/ns/apps/sa/payment"]
