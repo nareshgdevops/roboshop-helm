@@ -15,10 +15,10 @@ spec:
         app: {{ .Values.appName }}
     spec:
       securityContext:
-        runAsUser: 1000
-        runAsGroup: 3000
-        fsGroup: 2000
-        supplementalGroups: [ 4000 ]
+        runAsUser: 1001
+        runAsGroup: 1001
+        fsGroup: 1001
+        supplementalGroups: [ 1001 ]
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
