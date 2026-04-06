@@ -1,0 +1,18 @@
+{{ if .Values.istio.auth_policy.enabled }}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ .Values.appName }}-allow
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+            {{- range .Values.istio.principals }}
+            - {{ . }}
+            {{- end }}
+  {{ end }}
