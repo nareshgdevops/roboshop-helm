@@ -154,7 +154,8 @@ resource "helm_release" "external-dns" {
   depends_on = [
     null_resource.kubeconfig,
     null_resource.nginx-ingress,
-    null_resource.external-dns-secret
+    null_resource.external-dns-secret,
+    helm_release.argo-cd
   ]
   name       = "external-dns"
   repository = "https://kubernetes-sigs.github.io/external-dns/"
